@@ -84,10 +84,14 @@ int main(int argc, char* argv[]){
 	
 	//Set Mobility to static (i.e. nodes don't move)
 	MobilityHelper mobility;
+	mobility.SetPositionAllocator("ns3::GridPositionAllocator",
+		"DeltaX", DoubleValue(5.0),
+		"DeltaY", DoubleValue(10.0),
+		"GridWidth", UintegerValue(2),
+		"LayoutType", StringValue("RowFirst"));
 	mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
 	mobility.Install(wifiStaNodes);
 	mobility.Install(wifiApNode);
-	//TODO: position STA nodes somewhere other than default (IMPORTANT FOR VISUALIZER)
 	
 	//Install internet stack to both STA and AP nodes
 	InternetStackHelper stack;
